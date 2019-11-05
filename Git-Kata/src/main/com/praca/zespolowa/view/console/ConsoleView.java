@@ -29,4 +29,9 @@ public class ConsoleView implements View {
     public void info(String message) {
         System.out.println(message);
     }
+
+    @Override
+    public void error(String message) {
+        System.out.println("ERROR: " + message);
+    }
 }
