@@ -17,7 +17,9 @@ public class Menu {
     public static final String OPTION_FORMAT = "[%d] %s";
 
     public void show(List<Command> commands) {
-        //TODO ZADANIE 5 dodaj obsługę sytuacji w której nie będzie istniał żadna komenda, posługuj się widokiem(View) do kontaktu z interfejsem
+        if(commands.isEmpty()) {
+            view.error("List of commends is empty");
+        }
         for(Command command : commands) {
             String message = String.format(OPTION_FORMAT, commands.indexOf(command), command.getLabel());
             view.info(message);
