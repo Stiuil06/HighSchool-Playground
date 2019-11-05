@@ -1,16 +1,53 @@
 package com.praca.zespolowa.controller;
 
+import com.praca.zespolowa.config.Config;
+import com.praca.zespolowa.exception.DataCreationException;
+import com.praca.zespolowa.repository.CoffeeStatisticRepository;
+import com.praca.zespolowa.view.View;
+
 public class CreateCafeLatte implements Command {
-    //TODO ZADANIE 1 uzyskaj dostęp do widoku oraz repozytorium ze statystykami wstrzykując zależnosć
+    private View view;
+    private CoffeeStatisticRepository coffeeStatisticRepository;
+
+    public CreateCafeLatte(View view, CoffeeStatisticRepository coffeeStatisticRepository) {
+        this.view = view;
+        this.coffeeStatisticRepository = coffeeStatisticRepository;
+    }
+
     @Override
     public void execute() {
-        //TODO ZADANIE 1 Zaimplementuj komendę tak aby symulowała utworzenie kawy, umożliw użytkownikowi wybranie rozmiaru kawy, MAŁA,ŚREDNIA,DUŻA, pamiętaj o zaraportowaniu wykonanie kawy do repozytorium, posługuj się widokiem (View) do kontaktu z interfejsem
+        view.info("Trwa składanie zamówienia...");
+        view.info("Podaj rozmiar: ");
+        int a = view.readInt("1. MAŁA; 2. ŚREDNIA; 3. DUŻA");
+
+        String ourString;
+        if(a == 1) {
+            ourString = Config.COFFE.MAŁA_LATE.toString();
+        }
+
+        else if(a == 2) {
+            ourString = Config.COFFE.ŚREDNIA_LATE.toString();
+        }
+
+        else if(a == 3) {
+            ourString = Config.COFFE.DUŻA_LATE.toString();
+        }
+
+        else {
+            view.info("Brak takowego rozmiaru :(");
+            return ;
+        }
+
+        try {
+            coffeeStatisticRepository.increamentCoffe(ourString);
+        } catch (DataCreationException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public String getLabel() {
-        //TODO ZADANIE 1 Zaimplementuj metodę tak aby zwracała nazwę komendy
-        return null;
+        return "CreateCafeLatte" ;
     }
 
 }
