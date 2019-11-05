@@ -1,16 +1,24 @@
 package com.praca.zespolowa.controller;
 
+import com.praca.zespolowa.repository.CoffeeStatisticRepository;
+import com.praca.zespolowa.view.View;
+
 public class DisplayCoffeeStatistics implements Command {
-    //TODO ZADANIE 3 uzyskaj dostęp do widoku oraz repozytorium ze statystykami wstrzykując zależnosć
+    private CoffeeStatisticRepository coffeeStatisticRepository;
+    private View view;
+
+    public DisplayCoffeeStatistics(CoffeeStatisticRepository coffeeStatisticRepository, View view) {
+        this.coffeeStatisticRepository = coffeeStatisticRepository;
+        this.view = view;
+    }
 
     @Override
     public void execute() {
-        //TODO ZADANIE 3 Zaimplementuj komendę tak aby wyświetlała wszystkie zrobione kawy, posługuj się widokiem (View) do kontaktu z interfejse
+        view.info(coffeeStatisticRepository.findAll().toString());
     }
 
     @Override
     public String getLabel() {
-        //TODO ZADANIE 3 Zaimplementuj metodę tak aby zwracała nazwę komendy
-        return null;
+        return "Staty kaw";
     }
 }
