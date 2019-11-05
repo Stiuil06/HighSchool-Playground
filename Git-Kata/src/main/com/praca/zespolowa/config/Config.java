@@ -1,6 +1,7 @@
 package com.praca.zespolowa.config;
 
 import com.praca.zespolowa.controller.Command;
+import com.praca.zespolowa.controller.CreateCafeLatte;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 import com.praca.zespolowa.repository.inmemory.InMemoryCoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
@@ -16,7 +17,7 @@ public class Config {
 
     public List<Command> initializeCommands() {
         List<Command> commands = new ArrayList<>();
-        //TODO ZADANIE 1 Dodaj swoje komendy do listy wszystkich komend
+        commands.add(new CreateCafeLatte(view, coffeeStatisticRepository));
         //TODO ZADANIE 3 Dodaj swoje komendy do listy wszystkich komend
         return commands;
     }
@@ -26,7 +27,7 @@ public class Config {
     }
 
     public enum COFFE{
-        //TODO ZADANIE 1 Dodaj swoją kawę do enuma wszystkich kaw
+            MAŁA_LATE, ŚREDNIA_LATE, DUŻA_LATE
         //TODO ZADANIE 3 Dodaj swoją kawę do enuma wszystkich kaw
     }
 }
