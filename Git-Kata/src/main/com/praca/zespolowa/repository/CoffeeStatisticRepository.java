@@ -1,6 +1,5 @@
 package com.praca.zespolowa.repository;
 
-
 import com.praca.zespolowa.exception.DataCreationException;
 import java.util.Map;
 
