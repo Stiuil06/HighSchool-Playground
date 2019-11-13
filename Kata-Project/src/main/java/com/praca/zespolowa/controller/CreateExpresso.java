@@ -17,12 +17,12 @@ public class CreateExpresso implements Command {
 
     @Override
     public void execute() {
-        String kawusia = view.readString("Duza? (t/n)").toLowerCase();
+        String rozmiar = view.readString("Rozmiar? (single/double)").toLowerCase();
 
         boolean debil = true;
         do {
-            switch (kawusia) {
-                case ("t"):
+            switch (rozmiar) {
+                case ("double"):
                     try {
                         coffeeStatisticRepository.increamentCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
                         coffeeStatisticRepository.increamentCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
@@ -33,7 +33,7 @@ public class CreateExpresso implements Command {
                         debil = false;
                     }
                     break;
-                case ("n"):
+                case ("single"):
                     try {
                         coffeeStatisticRepository.increamentCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
                     } catch (DataCreationException e) {
@@ -44,7 +44,7 @@ public class CreateExpresso implements Command {
                     }
                     break;
                 default:
-                    break;
+                    throw new RuntimeException("Illegal argument: "+rozmiar);
             }
         } while (debil);
 
