@@ -2,6 +2,7 @@ package com.praca.zespolowa.config;
 
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 import com.praca.zespolowa.repository.inmemory.InMemoryCoffeeStatisticRepository;
+import com.praca.zespolowa.repository.mysql.MysqlCoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
 import com.praca.zespolowa.view.console.ConsoleView;
 import com.praca.zespolowa.view.console.Menu;
@@ -20,7 +21,7 @@ public class Config {
 
     public Config() {
         this.view = new ConsoleView();
-        this.coffeeStatisticRepository = new InMemoryCoffeeStatisticRepository();
+        this.coffeeStatisticRepository = new MysqlCoffeeStatisticRepository();
     }
 
     public Config(View view, CoffeeStatisticRepository coffeeStatisticRepository) {
@@ -42,5 +43,8 @@ public class Config {
 
     public enum COFFE {
         EGZPREZZO, MAŁA_LATE, ŚREDNIA_LATE, DUŻA_LATE
+        //TODO ZADANIE DODATKOWE (wykonać na osobnym branchu) ujednolicić nazwy zmiennych, metod itp w CAłYM systemie -> język angielski
+        // poprawić literówki  coffe -> coffee
+        // usunąć ewentualne znaki specjalne łśżć itp
     }
 }
