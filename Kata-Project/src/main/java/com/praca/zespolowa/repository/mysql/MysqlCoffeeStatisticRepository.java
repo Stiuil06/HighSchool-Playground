@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,18 +18,17 @@ import java.util.Map;
  */
 public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository {
     public MysqlCoffeeStatisticRepository() {
-        try(Connection connection = DBManager.getConnection()){
+        try (Connection connection = DBManager.getConnection()) {
             Statement statement = connection.createStatement();
             for (Config.COFFE value : Config.COFFE.values()) {
-                String select = "SELECT * FROM `coffee_statistic` WHERE `coffee_name` = '"+ value.toString() +"'";
+                String select = "SELECT * FROM `coffee_statistic` WHERE `coffee_name` = '" + value.toString() + "'";
                 ResultSet resultSet = statement.executeQuery(select);
-                if(!resultSet.next()){
-                    String insert = "INSERT INTO `coffee_statistic`(`coffee_name`, `amount`) VALUES ('"+value.toString()+"',0)";
+                if (!resultSet.next()) {
+                    String insert = "INSERT INTO `coffee_statistic`(`coffee_name`, `amount`) VALUES ('" + value.toString() + "',0)";
                     statement.executeUpdate(insert);
-                }
+                }//3====D cj
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -39,8 +40,20 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
     @Override
     public Map<String, Integer> findAll() {
+        try (Connection connection = DBManager.getConnection()) {
+            Statement statement = connection.createStatement();
+            Map<String, Integer> map = new HashMap<>();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM coffee_statistic");
+            while(resultSet.next()){
+                String coffee_name = resultSet.getString("coffee_name");
+                int amount = resultSet.getInt("amount");
+                map.put(coffee_name, amount);
+            }
+            return map;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         //TODO ZADANE 3 Pobierz wszystkie satystyki zrobionych kaw, załaduj do mapy i zwróc
-        throw new RuntimeException("method not implemented");
     }
 
     @Override
