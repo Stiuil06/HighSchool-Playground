@@ -1,4 +1,4 @@
-Feature: General expresso business rules
+Feature: General espresso business rules
 
   Scenario: Normal espresso is singly counted in stats
     Given clean statistic repository

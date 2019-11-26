@@ -30,7 +30,7 @@ public class ExpressoTest {
     }
 
     @When("create {word} espresso {int} times")
-    public void execute_CreateExpresso_command_times_and_select_single_espressoo(String size, Integer times) {
+    public void create_espresso_times(String size, Integer times) {
         view.setReadString(size);
 
         command = getCommand(config, CreateExpresso.class);

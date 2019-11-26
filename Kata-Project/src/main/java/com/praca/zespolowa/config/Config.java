@@ -19,8 +19,8 @@ public class Config {
     private CoffeeStatisticRepository coffeeStatisticRepository;
 
     public Config() {
-        view = new ConsoleView();
-        CoffeeStatisticRepository coffeeStatisticRepository = new InMemoryCoffeeStatisticRepository();
+        this.view = new ConsoleView();
+        this.coffeeStatisticRepository = new InMemoryCoffeeStatisticRepository();
     }
 
     public Config(View view, CoffeeStatisticRepository coffeeStatisticRepository) {
