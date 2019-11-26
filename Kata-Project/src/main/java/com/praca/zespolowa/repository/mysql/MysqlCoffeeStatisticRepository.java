@@ -1,8 +1,14 @@
 package com.praca.zespolowa.repository.mysql;
 
+import com.praca.zespolowa.config.Config;
+import com.praca.zespolowa.config.DBManager;
 import com.praca.zespolowa.exception.DataCreationException;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 
 /**
@@ -10,9 +16,19 @@ import java.util.Map;
  */
 public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository {
     public MysqlCoffeeStatisticRepository() {
-        //TODO ZADANE 1 Jeśli jakaś kawa nie istnieje w tabeli coffee_statistic w bazie coffee_machine to zainicjalizuj rekord z poprawną nazwą oraz zerowym stanem
-        // jeśli taki typ kawy istnieje nic nie rób
-        throw new RuntimeException("constructor not implemented");
+        try(Connection connection = DBManager.getConnection()){
+            Statement statement = connection.createStatement();
+            for (Config.COFFE value : Config.COFFE.values()) {
+                String select = "SELECT * FROM `coffee_statistic` WHERE `coffee_name` = '"+ value.toString() +"'";
+                ResultSet resultSet = statement.executeQuery(select);
+                if(!resultSet.next()){
+                    String insert = "INSERT INTO `coffee_statistic`(`coffee_name`, `amount`) VALUES ('"+value.toString()+"',0)";
+                    statement.executeUpdate(insert);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
