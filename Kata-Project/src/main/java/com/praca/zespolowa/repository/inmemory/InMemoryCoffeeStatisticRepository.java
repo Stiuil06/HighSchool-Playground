@@ -16,10 +16,7 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
     private Map<String, Integer> coffees;
 
     public InMemoryCoffeeStatisticRepository() {
-        coffees = new HashMap<>();
-        for (Config.COFFE value : Config.COFFE.values()) {
-            coffees.put(value.toString(), 0);
-        }
+        initRepository();
     }
 
     @Override
@@ -36,7 +33,7 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
 
     @Override
     public boolean resetAllStatistics() {
-        coffees = new HashMap<>();
+        initRepository();
         return true;
     }
 
@@ -44,5 +41,12 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
     public boolean resetStatisticFor(String coffeName) {
         coffees.replace(coffeName, 0);
         return true;
+    }
+
+    private void initRepository() {
+        coffees = new HashMap<>();
+        for (Config.COFFE value : Config.COFFE.values()) {
+            coffees.put(value.toString(), 0);
+        }
     }
 }
