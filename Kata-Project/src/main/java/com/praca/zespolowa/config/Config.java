@@ -1,15 +1,11 @@
 package com.praca.zespolowa.config;
 
+import com.praca.zespolowa.controller.*;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
-import com.praca.zespolowa.repository.inmemory.InMemoryCoffeeStatisticRepository;
 import com.praca.zespolowa.repository.mysql.MysqlCoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
 import com.praca.zespolowa.view.console.ConsoleView;
 import com.praca.zespolowa.view.console.Menu;
-import com.praca.zespolowa.controller.Command;
-import com.praca.zespolowa.controller.CreateCafeLatte;
-import com.praca.zespolowa.controller.CreateExpresso;
-import com.praca.zespolowa.controller.DisplayCoffeeStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +30,7 @@ public class Config {
         commands.add(new CreateCafeLatte(view, coffeeStatisticRepository));
         commands.add(new CreateExpresso(view, coffeeStatisticRepository));
         commands.add(new DisplayCoffeeStatistics(coffeeStatisticRepository, view));
+        commands.add(new ResetAllCoffeeStatistic(view, coffeeStatisticRepository));
         return commands;
     }
 
