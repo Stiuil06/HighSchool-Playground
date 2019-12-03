@@ -16,13 +16,13 @@ import java.util.Map;
  */
 public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository {
     public MysqlCoffeeStatisticRepository() {
-        try(Connection connection = DBManager.getConnection()){
+        try (Connection connection = DBManager.getConnection()) {
             Statement statement = connection.createStatement();
             for (Config.COFFE value : Config.COFFE.values()) {
-                String select = "SELECT * FROM `coffee_statistic` WHERE `coffee_name` = '"+ value.toString() +"'";
+                String select = "SELECT * FROM `coffee_statistic` WHERE `coffee_name` = '" + value.toString() + "'";
                 ResultSet resultSet = statement.executeQuery(select);
-                if(!resultSet.next()){
-                    String insert = "INSERT INTO `coffee_statistic`(`coffee_name`, `amount`) VALUES ('"+value.toString()+"',0)";
+                if (!resultSet.next()) {
+                    String insert = "INSERT INTO `coffee_statistic`(`coffee_name`, `amount`) VALUES ('" + value.toString() + "',0)";
                     statement.executeUpdate(insert);
                 }
             }
@@ -33,8 +33,24 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
     @Override
     public boolean increamentCoffe(String coffeName) throws DataCreationException {
-        //TODO ZADANE 2 Zainkrementuj ilosć zrobionych kaw o podanej nazwie o jeden. Możesz pobrać liczbę dodać jeden i zaaktualizować rekord, lub zrobioć update na bazie
-        throw new RuntimeException("method not implemented");
+
+        try (Connection connection = DBManager.getConnection()) {
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("SELECT amount FROM coffee_statistic WHERE coffee_name = '" + coffeName + "'");
+            if (resultSet.next()) {
+                int amount = resultSet.getInt("amount");
+                amount++;
+                statement.executeUpdate("UPDATE coffee_statistic SET amount = " + amount + " WHERE coffee_name = '" + coffeName + "'");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
     }
 
     @Override
