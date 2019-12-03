@@ -45,8 +45,16 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
     @Override
     public boolean resetAllStatistics() {
-        //TODO ZADANE 4 Wyzeruj pole amount dla wszystkich rekordów w tabeli coffe_statistic
-        throw new RuntimeException("method not implemented");
+        try (Connection connection = DBManager.getConnection()) {
+
+            Statement statement = connection.createStatement();
+
+            statement.executeUpdate("UPDATE coffee_statistic SET amount = " + 0);
+            return true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
