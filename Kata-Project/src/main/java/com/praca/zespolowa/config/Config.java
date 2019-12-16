@@ -2,6 +2,7 @@ package com.praca.zespolowa.config;
 
 import com.praca.zespolowa.controller.*;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
+import com.praca.zespolowa.repository.inmemory.InMemoryCoffeeStatisticRepository;
 import com.praca.zespolowa.repository.mysql.MysqlCoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
 import com.praca.zespolowa.view.console.ConsoleView;
@@ -17,7 +18,8 @@ public class Config {
 
     public Config() {
         this.view = new ConsoleView();
-        this.coffeeStatisticRepository = new MysqlCoffeeStatisticRepository();
+        this.coffeeStatisticRepository = new InMemoryCoffeeStatisticRepository();
+//        this.coffeeStatisticRepository = new MysqlCoffeeStatisticRepository();
     }
 
     public Config(View view, CoffeeStatisticRepository coffeeStatisticRepository) {

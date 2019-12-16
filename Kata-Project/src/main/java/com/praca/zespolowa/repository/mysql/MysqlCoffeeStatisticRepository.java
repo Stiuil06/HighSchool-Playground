@@ -32,17 +32,17 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
     }
 
     @Override
-    public boolean increamentCoffe(String coffeName) throws DataCreationException {
+    public boolean incrementCoffe(String coffeeName) throws DataCreationException {
 
         try (Connection connection = DBManager.getConnection()) {
 
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("SELECT amount FROM coffee_statistic WHERE coffee_name = '" + coffeName + "'");
+            ResultSet resultSet = statement.executeQuery("SELECT amount FROM coffee_statistic WHERE coffee_name = '" + coffeeName + "'");
             if (resultSet.next()) {
                 int amount = resultSet.getInt("amount");
                 amount++;
-                statement.executeUpdate("UPDATE coffee_statistic SET amount = " + amount + " WHERE coffee_name = '" + coffeName + "'");
+                statement.executeUpdate("UPDATE coffee_statistic SET amount = " + amount + " WHERE coffee_name = '" + coffeeName + "'");
                 return true;
             }
 
@@ -74,7 +74,7 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
     }
 
     @Override
-    public boolean resetStatisticFor(String coffeName) {
+    public boolean resetStatisticFor(String coffeeName) {
         throw new RuntimeException("method not implemented");
         //TODO ZADANIE 5 Wyzeruj pole amount dla wybranego rodzaju kawy w tabeli coffe_statistic
     }

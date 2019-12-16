@@ -20,9 +20,9 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
     }
 
     @Override
-    public boolean increamentCoffe(String coffeName) throws DataCreationException {
-        int x = coffees.get(coffeName);
-        coffees.replace(coffeName, x+1);
+    public boolean incrementCoffe(String coffeeName) throws DataCreationException {
+        int x = coffees.get(coffeeName);
+        coffees.replace(coffeeName, x+1);
         return true;
     }
 
@@ -38,8 +38,8 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
     }
 
     @Override
-    public boolean resetStatisticFor(String coffeName) {
-        coffees.replace(coffeName, 0);
+    public boolean resetStatisticFor(String coffeeName) {
+        coffees.replace(coffeeName, 0);
         return true;
     }
 
