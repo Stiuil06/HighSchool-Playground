@@ -11,10 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MysqlCoffeeStatisticRepositoryTest {
 
+    private final CoffeeStatisticRepository repo = new MysqlCoffeeStatisticRepository();
+
     @Test
     void shouldThrowExceptionWithCauseSqlStatementException() {
-        // given
-        CoffeeStatisticRepository repo = new MysqlCoffeeStatisticRepository();
         // when
         Throwable exception = Assertions.catchThrowable(repo::resetAllStatistics);
         // then
