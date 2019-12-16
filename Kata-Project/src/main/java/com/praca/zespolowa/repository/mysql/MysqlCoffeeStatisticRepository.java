@@ -58,6 +58,12 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
     }
 
     @Override
+    public Integer getCountOfAllCoffees() {
+        //TODO ZADANIE 6 Należy pobrać (zsumować) wszystkie statystyki żeby dowiedzieć się ile nasz ekspres zrobił kaw
+        throw new MethodNotImplementedException();
+    }
+
+    @Override
     public boolean resetAllStatistics() {
         try (Connection connection = DBManager.getConnection()) {
 
