@@ -3,6 +3,7 @@ package com.praca.zespolowa.repository.mysql;
 import com.praca.zespolowa.config.Config;
 import com.praca.zespolowa.config.DBManager;
 import com.praca.zespolowa.exception.DataCreationException;
+import com.praca.zespolowa.exception.MethodNotImplementedException;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 
 import java.sql.Connection;
@@ -11,9 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
-/**
- * Created By wegrzyna on 26.11.2019
- */
 public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository {
     public MysqlCoffeeStatisticRepository() {
         try (Connection connection = DBManager.getConnection()) {
@@ -56,7 +54,7 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
     @Override
     public Map<String, Integer> findAll() {
         //TODO ZADANE 3 Pobierz wszystkie satystyki zrobionych kaw, załaduj do mapy i zwróc
-        throw new RuntimeException("method not implemented");
+        throw new MethodNotImplementedException();
     }
 
     @Override
@@ -67,15 +65,15 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
             statement.executeUpdate("UPDATE coffee_statistic SET amount = " + 0);
             return true;
-
         } catch (SQLException e) {
+            //TODO ZADANIE 4 Opakuj ten wyjatek we wlasny biznesowo jasny wyjatek
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public boolean resetStatisticFor(String coffeeName) {
-        throw new RuntimeException("method not implemented");
+        throw new MethodNotImplementedException();
         //TODO ZADANIE 5 Wyzeruj pole amount dla wybranego rodzaju kawy w tabeli coffe_statistic
     }
 }
