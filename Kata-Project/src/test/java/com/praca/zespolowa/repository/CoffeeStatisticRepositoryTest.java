@@ -21,7 +21,7 @@ public class CoffeeStatisticRepositoryTest {
     @Given("not empty repository")
     public void not_empty_repository() throws DataCreationException {
         coffeeStatisticRepository = new InMemoryCoffeeStatisticRepository();
-        coffeeStatisticRepository.increamentCoffe(Config.COFFE.DUŻA_LATE.toString());
+        coffeeStatisticRepository.incrementCoffe(Config.COFFE.DUŻA_LATE.toString());
     }
 
     @When("reset repository")

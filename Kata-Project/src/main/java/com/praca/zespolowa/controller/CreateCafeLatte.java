@@ -39,7 +39,7 @@ public class CreateCafeLatte implements Command {
         }
 
         try {
-            coffeeStatisticRepository.increamentCoffe(ourString);
+            coffeeStatisticRepository.incrementCoffe(ourString);
         } catch (DataCreationException e) {
             e.printStackTrace();
         }
