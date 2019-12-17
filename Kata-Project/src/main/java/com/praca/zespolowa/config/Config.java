@@ -39,10 +39,7 @@ public class Config {
         return new Menu(view);
     }
 
-    public enum COFFE {
-        EGZPREZZO, MAŁA_LATE, ŚREDNIA_LATE, DUŻA_LATE
-        //TODO ZADANIE DODATKOWE (wykonać na osobnym branchu) ujednolicić nazwy zmiennych, metod itp w CAłYM systemie -> język angielski
-        // poprawić literówki  coffe -> coffee
-        // usunąć ewentualne znaki specjalne łśżć itp
+    public enum COFFEE {
+        ESPRESSO, SMALL_LATE, MEDIUM_LATE, BIG_LATE
     }
 }
