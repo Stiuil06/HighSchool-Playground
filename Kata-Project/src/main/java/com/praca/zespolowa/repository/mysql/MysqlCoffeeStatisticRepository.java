@@ -90,7 +90,16 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
     @Override
     public boolean resetStatisticFor(String coffeeName) {
-        throw new MethodNotImplementedException();
-        //TODO ZADANIE 5 Wyzeruj pole amount dla wybranego rodzaju kawy w tabeli coffe_statistic
+        try (Connection connection = DBManager.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT amount FROM coffee_statistic WHERE coffee_name = '" + coffeeName + "'");
+            if (resultSet.next()) {
+                statement.executeUpdate("UPDATE coffee_statistic SET amount = 0 WHERE coffee_name = '" + coffeeName + "'");
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }
