@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +66,12 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Integer getCountOfAllCoffees() {
+        //TODO ZADANIE 6 Należy pobrać (zsumować) wszystkie statystyki żeby dowiedzieć się ile nasz ekspres zrobił kaw
+        throw new MethodNotImplementedException();
     }
 
     @Override
