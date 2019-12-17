@@ -1,6 +1,6 @@
 package com.praca.zespolowa.repository;
 
-import com.praca.zespolowa.config.Config;
+import com.praca.zespolowa.config.AppConfig;
 import com.praca.zespolowa.exception.DataCreationException;
 import com.praca.zespolowa.repository.inmemory.InMemoryCoffeeStatisticRepository;
 import io.cucumber.java.en.Given;
@@ -21,7 +21,7 @@ public class CoffeeStatisticRepositoryTest {
     @Given("not empty repository")
     public void not_empty_repository() throws DataCreationException {
         coffeeStatisticRepository = new InMemoryCoffeeStatisticRepository();
-        coffeeStatisticRepository.incrementCoffe(Config.COFFE.DUŻA_LATE.toString());
+        coffeeStatisticRepository.incrementCoffe(AppConfig.COFFE.DUŻA_LATE.toString());
     }
 
     @When("reset repository")

@@ -1,7 +1,7 @@
 package com.praca.zespolowa.repository.inmemory;
 
 
-import com.praca.zespolowa.config.Config;
+import com.praca.zespolowa.config.AppConfig;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 
 import java.util.HashMap;
@@ -48,7 +48,7 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
 
     private void initRepository() {
         coffees = new HashMap<>();
-        for (Config.COFFE value : Config.COFFE.values()) {
+        for (AppConfig.COFFE value : AppConfig.COFFE.values()) {
             coffees.put(value.toString(), 0);
         }
     }

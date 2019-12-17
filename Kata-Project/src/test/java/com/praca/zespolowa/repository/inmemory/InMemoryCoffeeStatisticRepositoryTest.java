@@ -1,6 +1,6 @@
 package com.praca.zespolowa.repository.inmemory;
 
-import com.praca.zespolowa.config.Config;
+import com.praca.zespolowa.config.AppConfig;
 import com.praca.zespolowa.exception.DataCreationException;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 import org.junit.jupiter.api.Test;
@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class InMemoryCoffeeStatisticRepositoryTest {
 
-    private static final String ESPRESSO = Config.COFFE.EGZPREZZO.toString();
-    private static final String MEDUIM_LATE = Config.COFFE.ŚREDNIA_LATE.toString();
+    private static final String ESPRESSO = AppConfig.COFFE.EGZPREZZO.toString();
+    private static final String MEDUIM_LATE = AppConfig.COFFE.ŚREDNIA_LATE.toString();
 
     @Test
     void shouldReturnThreeWhenAddThreeCoffees() throws DataCreationException {

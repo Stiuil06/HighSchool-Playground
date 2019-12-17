@@ -3,11 +3,11 @@ package com.praca.zespolowa.controller;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
 
-public class DisplayCoffeeStatistics implements Command {
+public class DisplayCoffeeStatisticsCommand implements Command {
     private CoffeeStatisticRepository coffeeStatisticRepository;
     private View view;
 
-    public DisplayCoffeeStatistics(CoffeeStatisticRepository coffeeStatisticRepository, View view) {
+    public DisplayCoffeeStatisticsCommand(CoffeeStatisticRepository coffeeStatisticRepository, View view) {
         this.coffeeStatisticRepository = coffeeStatisticRepository;
         this.view = view;
     }
@@ -19,6 +19,6 @@ public class DisplayCoffeeStatistics implements Command {
 
     @Override
     public String getLabel() {
-        return "Staty kaw";
+        return "Coffee statistics";
     }
 }

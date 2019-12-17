@@ -3,12 +3,12 @@ package com.praca.zespolowa.controller;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
 
-public class ResetStatisticForCoffee implements Command {
+public class ResetStatisticForCoffeeCommand implements Command {
     private View view;
     private CoffeeStatisticRepository coffeeStatisticRepository;
 
 
-    public ResetStatisticForCoffee(View view, CoffeeStatisticRepository coffeeStatisticRepository) {
+    public ResetStatisticForCoffeeCommand(View view, CoffeeStatisticRepository coffeeStatisticRepository) {
         this.view = view;
         this.coffeeStatisticRepository = coffeeStatisticRepository;
     }
@@ -26,6 +26,6 @@ public class ResetStatisticForCoffee implements Command {
 
     @Override
     public String getLabel() {
-        return "Reset coffee statistic";
+        return "Reset single coffee statistic";
     }
 }

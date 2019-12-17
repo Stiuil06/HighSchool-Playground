@@ -1,15 +1,15 @@
 package com.praca.zespolowa.controller;
 
-import com.praca.zespolowa.config.Config;
+import com.praca.zespolowa.config.AppConfig;
 import com.praca.zespolowa.exception.DataCreationException;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
 
-public class CreateCafeLatte implements Command {
+public class CreateCafeLatteCommand implements Command {
     private View view;
     private CoffeeStatisticRepository coffeeStatisticRepository;
 
-    public CreateCafeLatte(View view, CoffeeStatisticRepository coffeeStatisticRepository) {
+    public CreateCafeLatteCommand(View view, CoffeeStatisticRepository coffeeStatisticRepository) {
         this.view = view;
         this.coffeeStatisticRepository = coffeeStatisticRepository;
     }
@@ -22,15 +22,15 @@ public class CreateCafeLatte implements Command {
 
         String ourString;
         if(a == 1) {
-            ourString = Config.COFFE.MAŁA_LATE.toString();
+            ourString = AppConfig.COFFE.MAŁA_LATE.toString();
         }
 
         else if(a == 2) {
-            ourString = Config.COFFE.ŚREDNIA_LATE.toString();
+            ourString = AppConfig.COFFE.ŚREDNIA_LATE.toString();
         }
 
         else if(a == 3) {
-            ourString = Config.COFFE.DUŻA_LATE.toString();
+            ourString = AppConfig.COFFE.DUŻA_LATE.toString();
         }
 
         else {
@@ -47,7 +47,7 @@ public class CreateCafeLatte implements Command {
 
     @Override
     public String getLabel() {
-        return "CreateCafeLatte" ;
+        return "Create Latte" ;
     }
 
 }

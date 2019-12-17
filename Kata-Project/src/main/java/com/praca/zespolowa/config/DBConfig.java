@@ -5,14 +5,14 @@ import java.sql.*;
 /**
  * Created By wegrzyna on 26.11.2019
  */
-public class DBManager {
+public class DBConfig {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/coffee_machine?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "zxcv";
 
     public static Connection getConnection() throws SQLException {
         try {
