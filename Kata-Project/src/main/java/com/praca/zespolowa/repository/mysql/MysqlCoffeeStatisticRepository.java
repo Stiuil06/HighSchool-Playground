@@ -2,8 +2,8 @@ package com.praca.zespolowa.repository.mysql;
 
 import com.praca.zespolowa.config.Config;
 import com.praca.zespolowa.config.DBManager;
-import com.praca.zespolowa.exception.DataCreationException;
 import com.praca.zespolowa.exception.MethodNotImplementedException;
+import com.praca.zespolowa.exception.ResetAllStatisticsException;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
     }
 
     @Override
-    public boolean incrementCoffe(String coffeeName) throws DataCreationException {
+    public boolean incrementCoffe(String coffeeName) {
 
         try (Connection connection = DBManager.getConnection()) {
 
@@ -83,8 +83,7 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
             statement.executeUpdate("UPDATE coffee_statistic SET amount = " + 0);
             return true;
         } catch (SQLException e) {
-            //TODO ZADANIE 4 Opakuj ten wyjatek we wlasny biznesowo jasny wyjatek
-            throw new RuntimeException(e);
+            throw new ResetAllStatisticsException(e);
         }
     }
 
