@@ -2,13 +2,9 @@ package com.praca.zespolowa.repository.inmemory;
 
 
 import com.praca.zespolowa.config.Config;
-import com.praca.zespolowa.exception.DataCreationException;
-import com.praca.zespolowa.model.Coffee;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticRepository {
@@ -20,15 +16,22 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
     }
 
     @Override
-    public boolean increamentCoffe(String coffeName) throws DataCreationException {
-        int x = coffees.get(coffeName);
-        coffees.replace(coffeName, x+1);
+    public boolean incrementCoffe(String coffeeName) {
+        int x = coffees.get(coffeeName);
+        coffees.replace(coffeeName, x + 1);
         return true;
     }
 
     @Override
-    public Map<String,Integer> findAll() {
+    public Map<String, Integer> findAll() {
         return coffees;
+    }
+
+    @Override
+    public Integer getCountOfAllCoffees() {
+        // TODO Zadanie 6 Należy pobrać (zsumować) wszystkie statystyki żeby dowiedzieć się ile nasz ekspres zrobił kaw
+        return coffees.values().stream().mapToInt(Integer::intValue).sum();
+//    throw new MethodNotImplementedException();
     }
 
     @Override
@@ -38,8 +41,8 @@ public class InMemoryCoffeeStatisticRepository implements CoffeeStatisticReposit
     }
 
     @Override
-    public boolean resetStatisticFor(String coffeName) {
-        coffees.replace(coffeName, 0);
+    public boolean resetStatisticFor(String coffeeName) {
+        coffees.replace(coffeeName, 0);
         return true;
     }
 
