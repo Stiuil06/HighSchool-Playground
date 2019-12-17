@@ -70,8 +70,20 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
     @Override
     public Integer getCountOfAllCoffees() {
-        //TODO ZADANIE 6 Należy pobrać (zsumować) wszystkie statystyki żeby dowiedzieć się ile nasz ekspres zrobił kaw
-        throw new MethodNotImplementedException();
+        int amount = 0;
+
+        try (Connection connection = DBManager.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT SUM(amount) FROM coffee_statistic;");
+            while(resultSet.next()){
+                String coffee_name = resultSet.getString("coffee_name");
+                amount = resultSet.getInt("amount");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return amount;
     }
 
     @Override

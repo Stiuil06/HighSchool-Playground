@@ -1,10 +1,6 @@
 package com.praca.zespolowa.config;
 
-import com.praca.zespolowa.controller.Command;
-import com.praca.zespolowa.controller.CreateCafeLatte;
-import com.praca.zespolowa.controller.CreateExpresso;
-import com.praca.zespolowa.controller.DisplayCoffeeStatistics;
-import com.praca.zespolowa.controller.ResetAllCoffeeStatistic;
+import com.praca.zespolowa.controller.*;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 import com.praca.zespolowa.repository.inmemory.InMemoryCoffeeStatisticRepository;
 import com.praca.zespolowa.view.View;
@@ -35,6 +31,7 @@ public class Config {
         commands.add(new CreateExpresso(view, coffeeStatisticRepository));
         commands.add(new DisplayCoffeeStatistics(coffeeStatisticRepository, view));
         commands.add(new ResetAllCoffeeStatistic(view, coffeeStatisticRepository));
+        commands.add(new GetCountOfAllCoffees(view, coffeeStatisticRepository));
         return commands;
     }
 
