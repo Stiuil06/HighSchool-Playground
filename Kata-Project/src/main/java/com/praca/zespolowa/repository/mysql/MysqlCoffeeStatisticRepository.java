@@ -3,6 +3,7 @@ package com.praca.zespolowa.repository.mysql;
 import com.praca.zespolowa.config.Config;
 import com.praca.zespolowa.config.DBManager;
 import com.praca.zespolowa.exception.DataCreationException;
+import com.praca.zespolowa.exception.MethodNotImplementedException;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 
 import java.sql.Connection;
@@ -13,9 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created By wegrzyna on 26.11.2019
- */
 public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository {
     public MysqlCoffeeStatisticRepository() {
         try (Connection connection = DBManager.getConnection()) {
@@ -33,9 +31,25 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
     }
 
     @Override
-    public boolean increamentCoffe(String coffeName) throws DataCreationException {
-        //TODO ZADANE 2 Zainkrementuj ilosć zrobionych kaw o podanej nazwie o jeden. Możesz pobrać liczbę dodać jeden i zaaktualizować rekord, lub zrobioć update na bazie
-        throw new RuntimeException("method not implemented");
+    public boolean incrementCoffe(String coffeeName) throws DataCreationException {
+
+        try (Connection connection = DBManager.getConnection()) {
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("SELECT amount FROM coffee_statistic WHERE coffee_name = '" + coffeeName + "'");
+            if (resultSet.next()) {
+                int amount = resultSet.getInt("amount");
+                amount++;
+                statement.executeUpdate("UPDATE coffee_statistic SET amount = " + amount + " WHERE coffee_name = '" + coffeeName + "'");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
     }
 
     @Override
@@ -53,18 +67,25 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        //TODO ZADANE 3 Pobierz wszystkie satystyki zrobionych kaw, załaduj do mapy i zwróc
     }
 
     @Override
     public boolean resetAllStatistics() {
-        //TODO ZADANE 4 Wyzeruj pole amount dla wszystkich rekordów w tabeli coffe_statistic
-        throw new RuntimeException("method not implemented");
+        try (Connection connection = DBManager.getConnection()) {
+
+            Statement statement = connection.createStatement();
+
+            statement.executeUpdate("UPDATE coffee_statistic SET amount = " + 0);
+            return true;
+        } catch (SQLException e) {
+            //TODO ZADANIE 4 Opakuj ten wyjatek we wlasny biznesowo jasny wyjatek
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public boolean resetStatisticFor(String coffeName) {
-        throw new RuntimeException("method not implemented");
+    public boolean resetStatisticFor(String coffeeName) {
+        throw new MethodNotImplementedException();
         //TODO ZADANIE 5 Wyzeruj pole amount dla wybranego rodzaju kawy w tabeli coffe_statistic
     }
 }

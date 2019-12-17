@@ -24,8 +24,8 @@ public class CreateExpresso implements Command {
             switch (rozmiar) {
                 case ("double"):
                     try {
-                        coffeeStatisticRepository.increamentCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
-                        coffeeStatisticRepository.increamentCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
+                        coffeeStatisticRepository.incrementCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
+                        coffeeStatisticRepository.incrementCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
                     } catch (DataCreationException e) {
                         e.printStackTrace();
                     }
@@ -35,7 +35,7 @@ public class CreateExpresso implements Command {
                     break;
                 case ("single"):
                     try {
-                        coffeeStatisticRepository.increamentCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
+                        coffeeStatisticRepository.incrementCoffe(String.valueOf(Config.COFFE.EGZPREZZO));
                     } catch (DataCreationException e) {
                         e.printStackTrace();
                     }
