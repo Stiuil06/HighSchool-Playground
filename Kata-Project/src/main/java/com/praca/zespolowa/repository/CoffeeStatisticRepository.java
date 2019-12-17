@@ -2,6 +2,7 @@ package com.praca.zespolowa.repository;
 
 import com.praca.zespolowa.exception.DataCreationException;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 public interface CoffeeStatisticRepository {
@@ -11,7 +12,7 @@ public interface CoffeeStatisticRepository {
 
     Integer getCountOfAllCoffees();
 
-    boolean resetAllStatistics();
+    boolean resetAllStatistics() throws SQLException;
 
     boolean resetStatisticFor(String coffeeName);
 }
