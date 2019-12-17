@@ -50,17 +50,17 @@ public class StudentHomeWork1 {
 
     private static void fillList(List<Student> students) {
         students.add(new Student("Jan", "Kowalski", LocalDate.now().minusYears(1), 4.82));
-        students.add(new Student("Mateusz", "***REMOVED***", LocalDate.now().minusYears(1), 4.88));
-        students.add(new Student("Cezary", "***REMOVED***", LocalDate.now().minusYears(1), 4.84));
-        students.add(new Student("Mikołaj", "***REMOVED***", LocalDate.now().minusYears(1), 4.85));
-        students.add(new Student("Krzysztof", "***REMOVED***", LocalDate.now().minusYears(1), 4.86));
+        students.add(new Student("Mateusz", "Kowalski", LocalDate.now().minusYears(1), 4.88));
+        students.add(new Student("Cezary", "Kowalski", LocalDate.now().minusYears(1), 4.84));
+        students.add(new Student("Mikołaj", "Kowalski", LocalDate.now().minusYears(1), 4.85));
+        students.add(new Student("Krzysztof", "Kowalski", LocalDate.now().minusYears(1), 4.86));
         students.add(new Student("Marcin", "Kowalski", LocalDate.now().minusYears(2), 4.02));
         students.add(new Student("Michał", "Kowalski", LocalDate.now(), 2.52));
-        students.add(new Student("Paweł", "***REMOVED***", LocalDate.now(), 4.83));
-        students.add(new Student("Mateusz", "***REMOVED***", LocalDate.now(), 4.85));
-        students.add(new Student("Kinga", "***REMOVED***", LocalDate.now(), 4.87));
-        students.add(new Student("Adam", "***REMOVED***", LocalDate.now(), 4.69));
-        students.add(new Student("Piotr", "***REMOVED***", LocalDate.now(), 4.81));
+        students.add(new Student("Paweł", "Kowalski", LocalDate.now(), 4.83));
+        students.add(new Student("Mateusz", "Kowalski", LocalDate.now(), 4.85));
+        students.add(new Student("Kinga", "Kowalski", LocalDate.now(), 4.87));
+        students.add(new Student("Adam", "Kowalski", LocalDate.now(), 4.69));
+        students.add(new Student("Piotr", "Kowalski", LocalDate.now(), 4.81));
     }
 
     private static void breakLine() {

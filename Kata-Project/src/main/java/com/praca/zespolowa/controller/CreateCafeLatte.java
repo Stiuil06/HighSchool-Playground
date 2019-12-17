@@ -16,25 +16,25 @@ public class CreateCafeLatte implements Command {
 
     @Override
     public void execute() {
-        view.info("Trwa składanie zamówienia...");
-        view.info("Podaj rozmiar: ");
-        int a = view.readInt("1. MAŁA; 2. ŚREDNIA; 3. DUŻA");
+        view.info("Order is being processed...");
+        view.info("Give me size: ");
+        int a = view.readInt("1. Small; 2. Medium; 3. Big");
 
         String ourString;
         if(a == 1) {
-            ourString = Config.COFFE.MAŁA_LATE.toString();
+            ourString = Config.COFFEE.SMALL_LATE.toString();
         }
 
         else if(a == 2) {
-            ourString = Config.COFFE.ŚREDNIA_LATE.toString();
+            ourString = Config.COFFEE.MEDIUM_LATE.toString();
         }
 
         else if(a == 3) {
-            ourString = Config.COFFE.DUŻA_LATE.toString();
+            ourString = Config.COFFEE.BIG_LATE.toString();
         }
 
         else {
-            view.info("Brak takowego rozmiaru :(");
+            view.info("There is no such size :(");
             return ;
         }
 
@@ -43,6 +43,7 @@ public class CreateCafeLatte implements Command {
         } catch (DataCreationException e) {
             e.printStackTrace();
         }
+        view.info("Here goes your coffee. Enjoy IT ;)");
     }
 
     @Override
