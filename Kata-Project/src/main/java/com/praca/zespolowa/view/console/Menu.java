@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Menu {
 
+    public static final String OPTION_FORMAT = "[%d] %s";
     private List<Command> commands;
     private View view;
 
@@ -14,13 +15,11 @@ public class Menu {
         this.view = view;
     }
 
-    public static final String OPTION_FORMAT = "[%d] %s";
-
     public void show(List<Command> commands) {
-        if(commands.isEmpty()) {
+        if (commands.isEmpty()) {
             view.error("List of commends is empty");
         }
-        for(Command command : commands) {
+        for (Command command : commands) {
             String message = String.format(OPTION_FORMAT, commands.indexOf(command), command.getLabel());
             view.info(message);
         }

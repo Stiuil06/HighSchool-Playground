@@ -16,7 +16,7 @@ public class GetCountOfAllCoffees implements Command {
     }
 
     @Override
-    public void execute() throws SQLException {
+    public void execute() {
         view.info(coffeeStatisticRepository.getCountOfAllCoffees().toString());
     }
 

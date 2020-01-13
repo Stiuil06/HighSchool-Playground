@@ -1,9 +1,8 @@
 package com.praca.zespolowa.repository.mysql;
 
-import com.praca.zespolowa.config.Config;
-import com.praca.zespolowa.config.DBManager;
-import com.praca.zespolowa.exception.MethodNotImplementedException;
-import com.praca.zespolowa.exception.ResetAllStatisticsException;
+import com.praca.zespolowa.config.AppConfig;
+import com.praca.zespolowa.config.DBConfig;
+import com.praca.zespolowa.exception.CoffeeQueryException;
 import com.praca.zespolowa.repository.CoffeeStatisticRepository;
 
 import java.sql.Connection;
@@ -13,11 +12,15 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository {
+public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository, AutoCloseable {
+
+    private Connection connection;
+
     public MysqlCoffeeStatisticRepository() {
-        try (Connection connection = DBManager.getConnection()) {
+        try {
+            connection = DBConfig.getConnection();
             Statement statement = connection.createStatement();
-            for (Config.COFFE value : Config.COFFE.values()) {
+            for (AppConfig.COFFEE value : AppConfig.COFFEE.values()) {
                 String select = "SELECT * FROM `coffee_statistic` WHERE `coffee_name` = '" + value.toString() + "'";
                 ResultSet resultSet = statement.executeQuery(select);
                 if (!resultSet.next()) {
@@ -26,13 +29,14 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
                 }//3====D cj
             }
         } catch (SQLException e) {
+            throw new CoffeeQueryException(e);
         }
     }
 
     @Override
     public boolean incrementCoffe(String coffeeName) {
 
-        try (Connection connection = DBManager.getConnection()) {
+        try (Connection connection = DBConfig.getConnection()) {
 
             Statement statement = connection.createStatement();
 
@@ -53,11 +57,11 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
     @Override
     public Map<String, Integer> findAll() {
-        try (Connection connection = DBManager.getConnection()) {
+        try (Connection connection = DBConfig.getConnection()) {
             Statement statement = connection.createStatement();
             Map<String, Integer> map = new HashMap<>();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM coffee_statistic");
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String coffee_name = resultSet.getString("coffee_name");
                 int amount = resultSet.getInt("amount");
                 map.put(coffee_name, amount);
@@ -72,10 +76,10 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
     public Integer getCountOfAllCoffees() {
         int amount = 0;
 
-        try (Connection connection = DBManager.getConnection()) {
+        try (Connection connection = DBConfig.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT SUM(amount) FROM coffee_statistic;");
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String coffee_name = resultSet.getString("coffee_name");
                 amount = resultSet.getInt("amount");
             }
@@ -88,20 +92,46 @@ public class MysqlCoffeeStatisticRepository implements CoffeeStatisticRepository
 
     @Override
     public boolean resetAllStatistics() {
-        try (Connection connection = DBManager.getConnection()) {
+        try (Connection connection = DBConfig.getConnection()) {
 
             Statement statement = connection.createStatement();
 
             statement.executeUpdate("UPDATE coffee_statistic SET amount = " + 0);
             return true;
         } catch (SQLException e) {
-            throw new ResetAllStatisticsException(e);
+            return false;
         }
     }
 
     @Override
     public boolean resetStatisticFor(String coffeeName) {
-        throw new MethodNotImplementedException();
-        //TODO ZADANIE 5 Wyzeruj pole amount dla wybranego rodzaju kawy w tabeli coffe_statistic
+        Statement statement = getStatement();
+        executeUpdate(statement, "UPDATE coffee_statistic SET amount = 0 WHERE coffee_name = '" + coffeeName + "'");
+        return true;
+    }
+
+    private void executeUpdate(Statement statement, String command) {
+        try {
+            statement.executeUpdate(command);
+        } catch (SQLException e) {
+            throw new CoffeeQueryException(command, e);
+        }
+    }
+
+    private Statement getStatement() {
+        try {
+            return connection.createStatement();
+        } catch (SQLException e) {
+            throw new CoffeeQueryException("Error when creating statement", e);
+        }
+    }
+
+    @Override
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new CoffeeQueryException(e);
+        }
     }
 }
