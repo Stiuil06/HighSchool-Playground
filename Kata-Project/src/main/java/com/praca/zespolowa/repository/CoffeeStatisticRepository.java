@@ -12,7 +12,7 @@ public interface CoffeeStatisticRepository {
 
     Integer getCountOfAllCoffees();
 
-    boolean resetAllStatistics() throws SQLException;
+    boolean resetAllStatistics();
 
     boolean resetStatisticFor(String coffeeName);
 }
